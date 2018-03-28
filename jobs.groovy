@@ -8,7 +8,7 @@ job("MAIN") {
         activeChoiceParam('CHILD') {
            description('Choose child builds')
            choiceType('CHECKBOX')
-                groovyScript {script("$childlist")}}}
+                groovyScript {script(return'$childlist')}}}
         scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
         disabled(false)
         concurrentBuild(false)
