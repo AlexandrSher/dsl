@@ -10,7 +10,8 @@ job("MAIN") {
            description('Choose child builds')
            choiceType('CHECKBOX')
                 groovyScript {script("return[$childlist]")}}}
-        scm {git('https://github.com/AlexandrSher/dsl', '$branch')}
+        scm {git{remote{github("AlexandrSher/dsl", "https")}
+                branch("*/$branch")}}
         disabled(false)
         concurrentBuild(false)
         
@@ -19,13 +20,15 @@ job("MAIN") {
                                 block { buildStepFailure('FAILURE')
                                         unstable('FAILURE')
                                         failure('UNSTABLE')}
-                                parameters {predefinedProp('branch', '$branch')}}}}}
+                                parameters {predefinedProp('branch', '$branch')}}}}
+        wrappers {preBuildCleanup()}}
 
 name.each {
 job("$it") {
         description("THIS is child")
         keepDependencies(false)
-        scm {git('https://github.com/AlexandrSher/dsl', '$branch')}
+        scm {git{remote{github("AlexandrSher/dsl", "https")}
+                branch("*/$branch")}}
         disabled(false)
         concurrentBuild(false)
         steps {shell("""chmod +x script.sh
