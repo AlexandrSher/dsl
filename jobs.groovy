@@ -15,7 +15,7 @@ job("MAIN") {
             remote {
                 github("AlexandrSher/dsl", "https")
             }
-            branch("*/\$branch")
+            branch("\$branch")
         }
 }
         disabled(false)
@@ -38,7 +38,7 @@ job("$it") {
             remote {
                 github("AlexandrSher/dsl", "https")
             }
-            branch("*/\$branch")
+            branch("\$branch")
         }
 }
         disabled(false)
