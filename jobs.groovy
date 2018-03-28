@@ -26,7 +26,7 @@ name.each {
 job("$it") {
         description("THIS is child")
         keepDependencies(false)
-        scm {git {remote {github ("AlexandrSher/dsl", "https")} branch ("*/$branch")}}
+        scm {git {remote {github ("AlexandrSher/dsl", "https")} branch ("*/\$branch")}}
         disabled(false)
         concurrentBuild(false)
         steps {shell("""chmod +x script.sh
