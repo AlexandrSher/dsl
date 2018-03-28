@@ -10,7 +10,7 @@ job("MAIN") {
            description('Choose child builds')
            choiceType('CHECKBOX')
                 groovyScript {script("return[$childlist]")}}}
-        scm {git {remote {github ("AlexandrSher/dsl", "https")} branch ("*/$branch")}}
+        scm {git {remote {github ("AlexandrSher/dsl", "https")} branch ("*/\$branch")}}
         disabled(false)
         concurrentBuild(false)
         
