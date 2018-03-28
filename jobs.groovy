@@ -1,5 +1,5 @@
 def jobs = (1..4)
-def childlist = "CHILD_1,CHILD_2,CHILD_3,CHILD_4"
+def childlist = "'CHILD_1','CHILD_2','CHILD_3','CHILD_4'"
 def name = []
 jobs.each {name.add("CHILD_$it")}
 
