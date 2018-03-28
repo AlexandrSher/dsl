@@ -1,27 +1,28 @@
 def jobs = (1..4)
-def childlist = []
-jobs.each {childlist.add("CHILD_$it")}
+def childlist = 'CHILD_1,CHILD_2,CHILD_3,CHILD_4'
+def name = []
+jobs.each {name.add("CHILD_$it")}
 
-job("MAIN") {
+job('MAIN') {
         description("This is main")
         parameters {choiceParam("branch", ["achernak", "master"], "")
         activeChoiceParam('CHILD') {
            description('Choose child builds')
            choiceType('CHECKBOX')
-                groovyScript {script("return$childlist")}}}
+                groovyScript {script("return[$childlist]")}}}
         scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
         disabled(false)
         concurrentBuild(false)
-        childlist.each {
+        
         steps {downstreamParameterized {
-                        trigger("$it") {
-                                block { buildStepFailure("FAILURE")
-                                        unstable("FAILURE")
-                                        failure("UNSTABLE")}
-                                parameters {predefinedProp('branch', '$branch')}}}}}}
+                        trigger('$childlist') {
+                                block { buildStepFailure('FAILURE')
+                                        unstable('FAILURE')
+                                        failure('UNSTABLE')}
+                                parameters {predefinedProp('branch', '$branch')}}}}}
 
-childlist.each {
-job("$it") {
+name.each {
+job('$it') {
         description("THIS is child")
         keepDependencies(false)
         scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
