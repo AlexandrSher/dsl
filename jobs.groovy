@@ -1,9 +1,9 @@
 def jobs = (1..4)
-def childlist = 'CHILD_1,CHILD_2,CHILD_3,CHILD_4'
+def childlist = "CHILD_1,CHILD_2,CHILD_3,CHILD_4"
 def name = []
 jobs.each {name.add("CHILD_$it")}
 
-job('MAIN') {
+job("MAIN") {
         description("This is main")
         parameters {choiceParam("branch", ["achernak", "master"], "")
         activeChoiceParam('CHILD') {
@@ -19,10 +19,10 @@ job('MAIN') {
                                 block { buildStepFailure('FAILURE')
                                         unstable('FAILURE')
                                         failure('UNSTABLE')}
-                                parameters {predefinedProp('branch', '$branch')}}}}}
+                                parameters {predefinedProp('branch', '$branch')}}}}
 
 name.each {
-job('$it') {
+job("$it") {
         description("THIS is child")
         keepDependencies(false)
         scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
