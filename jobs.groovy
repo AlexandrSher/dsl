@@ -5,11 +5,11 @@ jobs.each {childlist.add("CHILD_$it")}
 job("MAIN") {
         description("This is main")
         parameters {choiceParam("branch", ["achernak", "master"], "")
-        activeChoiceParam('BUILDS_TRIGGER') {
+        activeChoiceParam('CHILD') {
            description('Choose child builds')
            choiceType('CHECKBOX')
                 groovyScript {script("$childlist")}}}
-        scm {git('AlexandrSher/dsl', '$branch')}
+        scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
         disabled(false)
         concurrentBuild(false)
         childlist.each {
@@ -18,13 +18,13 @@ job("MAIN") {
                                 block { buildStepFailure("FAILURE")
                                         unstable("FAILURE")
                                         failure("UNSTABLE")}
-                                parameters {predefinedProp('branch', '${branch}')}}}}}}
+                                parameters {predefinedProp('branch', '$branch')}}}}}}
 
 childlist.each {
 job("$it") {
         description("THIS is child")
         keepDependencies(false)
-        scm {git('AlexandrSher/dsl', '$branch')}
+        scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
         disabled(false)
         concurrentBuild(false)
         steps {shell("""chmod +x script.sh
