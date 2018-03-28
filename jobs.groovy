@@ -15,7 +15,7 @@ job("MAIN") {
         concurrentBuild(false)
         
         steps {downstreamParameterized {
-                        trigger('$childlist') {
+                        trigger('$CHILD') {
                                 block { buildStepFailure('FAILURE')
                                         unstable('FAILURE')
                                         failure('UNSTABLE')}
