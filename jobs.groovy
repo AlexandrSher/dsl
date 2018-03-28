@@ -9,7 +9,7 @@ job("MAIN") {
            description('Choose child builds')
            choiceType('CHECKBOX')
                 groovyScript {script("$childlist")}}}
-        scm {github("AlexandrSher/dsl", "\$branch")}
+        scm {git('AlexandrSher/dsl', '$branch')}
         disabled(false)
         concurrentBuild(false)
         childlist.each {
@@ -22,12 +22,12 @@ job("MAIN") {
 
 childlist.each {
 job("$it") {
-        description()
+        description("THIS is child")
         keepDependencies(false)
-        scm {github("AlexandrSher/dsl", "\$branch")}
+        scm {git('AlexandrSher/dsl', '$branch')}
         disabled(false)
         concurrentBuild(false)
         steps {shell("""chmod +x script.sh
 bash -ex script.sh > output.txt
-tar czvf $BUILD_TAG.tar.gz output.txt jobs.groovy
-mv $BUILD_TAG.tar.gz /var/lib/jenkins/workspace/MAIN/""")}}}
+tar czvf \$BUILD_TAG.tar.gz output.txt jobs.groovy
+mv \$BUILD_TAG.tar.gz /var/lib/jenkins/workspace/MAIN/""")}}}
