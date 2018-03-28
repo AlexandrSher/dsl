@@ -10,7 +10,7 @@ job("MAIN") {
            description('Choose child builds')
            choiceType('CHECKBOX')
                 groovyScript {script("return[$childlist]")}}}
-        scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
+        scm {git('https://github.com/AlexandrSher/dsl', '$branch')}
         disabled(false)
         concurrentBuild(false)
         
@@ -25,7 +25,7 @@ name.each {
 job("$it") {
         description("THIS is child")
         keepDependencies(false)
-        scm {git('https://github.com/AlexandrSher/dsl.git', '$branch')}
+        scm {git('https://github.com/AlexandrSher/dsl', '$branch')}
         disabled(false)
         concurrentBuild(false)
         steps {shell("""chmod +x script.sh
