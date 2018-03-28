@@ -19,7 +19,7 @@ job("MAIN") {
                                 block { buildStepFailure('FAILURE')
                                         unstable('FAILURE')
                                         failure('UNSTABLE')}
-                                parameters {predefinedProp('branch', '$branch')}}}}
+                                parameters {predefinedProp('branch', '$branch')}}}}}
 
 name.each {
 job("$it") {
