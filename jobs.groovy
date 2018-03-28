@@ -8,7 +8,7 @@ job("MAIN") {
 	activeChoiceParam('BUILDS_TRIGGER') {
            description('Choose child builds')
            choiceType('CHECKBOX')
-		groovyScript {script("$childlist")}}}
+		groovyScript {script("$childlist")}}
 	scm {github("AlexandrSher/dsl", "\$branch")}
 	disabled(false)
 	concurrentBuild(false)
@@ -18,7 +18,7 @@ job("MAIN") {
 				block {	buildStepFailure("FAILURE")
 					unstable("FAILURE")
 					failure("UNSTABLE")}
-				parameters {predefinedProp('branch', '${branch}')}}}}	 
+				parameters {predefinedProp('branch', '${branch}')}}}}}	 
 
 childlist.each {
 job("$it") {
@@ -31,3 +31,4 @@ job("$it") {
 bash -ex script.sh > output.txt
 tar czvf $BUILD_TAG.tar.gz output.txt jobs.groovy 
 mv $BUILD_TAG.tar.gz /var/lib/jenkins/workspace/MAIN/""")}}}
+	
